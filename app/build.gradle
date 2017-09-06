@@ -184,8 +184,7 @@ if (buildWithTinker()) {
              * we can use git rev, svn rev or simply versionCode.
              * we will gen the tinkerId in your manifest automatic
              */
-//            tinkerId = getTinkerIdValue()
-            tinkerId = "TinkerDemo"
+           tinkerId = getTinkerIdValue()
         }
 
         dex {
