@@ -5,7 +5,7 @@ apply plugin: 'tinkerpatch-support'
  */
 def bakPath = file("${buildDir}/bakApk/")
 def baseInfo = "app-1.1.1-0906-10-34-45"
-def variantName = "release"
+def variantName = "debug"
 
 /**
  * 对于插件各参数的详细解析请参考
@@ -22,6 +22,11 @@ tinkerpatchSupport {
     tinkerEnable = isRelease()
 
     reflectApplication = true
+    /**
+     * 是否开启加固模式，仅仅打包改变的类，只能在加固中使用。
+     * 如果只在某个渠道使用了加固，可使用多flavors配置
+     **/
+    protectedApp = false
 
     autoBackupApkPath = "${bakPath}"
 
@@ -36,7 +41,25 @@ tinkerpatchSupport {
     baseApkFile = "${pathPrefix}/${name}.apk"
     baseProguardMappingFile = "${pathPrefix}/${name}-mapping.txt"
     baseResourceRFile = "${pathPrefix}/${name}-R.txt"
-
+    /**
+     * （可选）重命名备份文件的格式化字符串，默认为'${appName}-${variantName}'
+     *
+     * Available vars:
+     * 1. projectName
+     * 2. appName
+     * 3. packageName
+     * 4. buildType
+     * 5. versionName
+     * 6. versionCode
+     * 7. buildTime
+     * 8. fileSHA1
+     * 9. flavorName
+     * 10. variantName
+     *
+     * default value: '${appName}-${variantName}'
+     * Note: plz use single-quotation wrapping this format string
+     */
+    backupFileNameFormat = '${appName}-${variantName}'
     /**
      *  若有编译多flavors需求, 可以参照： https://github.com/TinkerPatch/tinkerpatch-flavors-sample
      *  注意: 除非你不同的flavor代码是不一样的,不然建议采用zip comment或者文件方式生成渠道信息（相关工具：walle 或者 packer-ng）

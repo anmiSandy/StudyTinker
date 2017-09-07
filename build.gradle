@@ -2,24 +2,29 @@
 
 buildscript {
     repositories {
+//        mavenLocal()
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.5.0'
-        // TinkerPatch 插件
-        classpath "com.tinkerpatch.sdk:tinkerpatch-gradle-plugin:1.1.8"
+        classpath 'com.android.tools.build:gradle:2.2.3'
+
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        classpath "com.tencent.tinker:tinker-patch-gradle-plugin:${TINKER_VERSION}"
     }
-
-
 }
 
 allprojects {
     repositories {
-        jcenter() {
-            url 'http://jcenter.bintray.com/'
-        }
+       // mavenLocal()
+        jcenter()
+    }
+}
+
+
+allprojects {
+    repositories {
+
     }
 }
 
